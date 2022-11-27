@@ -16,5 +16,12 @@
     "name": "Josh Jacobs",
     "homepage": "http://joshjacobs.me/"
   },
-  "type": "sample"
+  "type": "sample",
+  "samples": [
+    {
+     "displayName": "Example Scene",
+     "description": "Demonstrates the basic use case for infinitely scrolling 2D backgrounds.",
+     "path": "Samples~/Example Scene"
+    }
+  ]
 }
