@@ -1,0 +1,20 @@
+{
+  "name": "com.joshalexjacobs.segmented-parallax-package",
+  "version": "1.0.0",
+  "displayName": "Segmented Parallax",
+  "description": "A Unity package that handles seamless segmented parallax for infinite scrolling 2D backgrounds.",
+  "unity": "2021.3",
+  "unityRelease": "8f1",
+  "keywords": [
+    "unity",
+    "observables",
+    "scriptableobjects",
+    "editor",
+    "inputs"
+  ],
+  "author": {
+    "name": "Josh Jacobs",
+    "homepage": "http://joshjacobs.me/"
+  },
+  "type": "sample"
+}
