@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SegmentedParallaxPackage {
+namespace SegmentedParallax {
   public static class ParallaxControllerUtil {
     public static void CreateEmptySegment(List<Segment> segments, Transform parent,
       SegmentedParallaxController segmentedParallaxController) {

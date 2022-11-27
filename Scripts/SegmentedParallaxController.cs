@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-namespace SegmentedParallaxPackage {
+namespace SegmentedParallax {
   public class SegmentedParallaxController : MonoBehaviour {
 
     public float scrollSpeed = 1;

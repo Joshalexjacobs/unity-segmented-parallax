@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace SegmentedParallaxPackage {
+namespace SegmentedParallax {
   public enum SegmentState {
     Idle,
     Scrolling,

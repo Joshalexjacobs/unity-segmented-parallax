@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SegmentedParallaxPackage {
+namespace SegmentedParallax {
   public class RepeatableSegment : MonoBehaviour {
 
     private SpriteRenderer _spriteRenderer;
