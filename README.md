@@ -21,7 +21,6 @@ For now you'll need to import the Example Scene from the Package Manager window:
 ## Todo
    * Support for layered parallax backgrounds
    * Support for animated backgrounds
-   * Fix for inconsistent SpriteRenderer sort orders
    * Vertical and Horizontal scrolling (currently only vertical is supported)
    * Ability to reverse direction on the fly
    * Documentation
