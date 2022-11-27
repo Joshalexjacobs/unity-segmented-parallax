@@ -1,6 +1,6 @@
 {
   "name": "com.joshalexjacobs.segmented-parallax-package",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "displayName": "Segmented Parallax",
   "description": "A Unity package that handles seamless segmented parallax for infinite scrolling 2D backgrounds.",
   "unity": "2021.3",

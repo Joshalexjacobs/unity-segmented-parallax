@@ -161,14 +161,22 @@ namespace SegmentedParallax {
 
         switch (_segmentType) {
           case SegmentType.Loopable:
+            var repeatableSegmentSpriteRenderer = segment.repeatableSegment.GetComponent<SpriteRenderer>();
+            
+            // Leading Segment
             segment.leadingSegment = ParallaxControllerUtil.CreateSegmentGameObject(segment, "Leading Segment",
               segment.sprite, new Vector3(0f, 1f, 0f));
 
+            UpdateSegmentSpritRenderer(repeatableSegmentSpriteRenderer, segment.leadingSegment);
+            
             segment.leadingSegment.transform.SetAsFirstSibling();
 
+            // Trailing Segment
             segment.trailingSegment = ParallaxControllerUtil.CreateSegmentGameObject(segment, "Trailing Segment",
               segment.sprite, new Vector3(0f, -1f, 0f));
-
+            
+            UpdateSegmentSpritRenderer(repeatableSegmentSpriteRenderer, segment.trailingSegment);
+            
             segment.scrollPast = false;
 
             break;
@@ -210,6 +218,14 @@ namespace SegmentedParallax {
           segmentToRefresh.transform.localPosition = localPosition;
         }
       }
+    }
+
+    private void UpdateSegmentSpritRenderer(SpriteRenderer baseSegmentSpriteRenderer, GameObject segmentToUpdate) {
+      var segmentToUpdateSpriteRenderer = segmentToUpdate.GetComponent<SpriteRenderer>();
+
+      segmentToUpdateSpriteRenderer.sortingLayerName = baseSegmentSpriteRenderer.sortingLayerName;
+
+      segmentToUpdateSpriteRenderer.sortingOrder = baseSegmentSpriteRenderer.sortingOrder;
     }
   }
 #endif
