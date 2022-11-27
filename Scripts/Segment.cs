@@ -128,7 +128,7 @@ namespace SegmentedParallax {
   [CustomEditor(typeof(Segment))]
   public class SegmentEditor : Editor {
     private Sprite _sprite;
-
+    
     private SegmentType _segmentType;
 
     public override void OnInspectorGUI() {
@@ -143,11 +143,13 @@ namespace SegmentedParallax {
       if (EditorGUI.EndChangeCheck()) {
         segment.sprite = _sprite;
 
-        foreach (var componentsInChild in segment.gameObject.GetComponentsInChildren<SpriteRenderer>()) {
-          if (componentsInChild) {
-            componentsInChild.sprite = _sprite;
-          }
-        }
+        var repeatableSegmentSpriteRenderer = segment.repeatableSegment.GetComponent<SpriteRenderer>();
+        
+        repeatableSegmentSpriteRenderer.sprite = _sprite;
+
+        RefreshSegment(segment.leadingSegment, new Vector3(0f, _sprite.bounds.size.y, 0f));
+          
+        RefreshSegment(segment.trailingSegment, new Vector3(0f, -_sprite.bounds.size.y, 0f));
       }
 
       EditorGUI.BeginChangeCheck();
@@ -171,14 +173,16 @@ namespace SegmentedParallax {
 
             break;
           case SegmentType.Static:
-            DestroyImmediate(segment.leadingSegment);
+            if (segment.leadingSegment)
+              DestroyImmediate(segment.leadingSegment);
 
             segment.leadingSegment = null;
 
-            DestroyImmediate(segment.trailingSegment);
+            if (segment.trailingSegment)
+              DestroyImmediate(segment.trailingSegment);
 
             segment.trailingSegment = null;
-
+            
             break;
         }
       }
@@ -194,6 +198,18 @@ namespace SegmentedParallax {
        */
 
       EditorUtility.SetDirty(target);
+    }
+
+    private void RefreshSegment(GameObject segmentToRefresh, Vector3 localPosition) {
+      if (segmentToRefresh) {
+        var segmentSpriteRenderer = segmentToRefresh.GetComponent<SpriteRenderer>();
+
+        if (segmentSpriteRenderer) {
+          segmentSpriteRenderer.sprite = _sprite;
+
+          segmentToRefresh.transform.localPosition = localPosition;
+        }
+      }
     }
   }
 #endif
