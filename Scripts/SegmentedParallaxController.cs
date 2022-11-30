@@ -29,7 +29,7 @@ namespace SegmentedParallax {
 
       if (_segmentIndex < segments.Count) {
         segments[_segmentIndex].transform.localPosition = currentSegment.transform.localPosition +
-                                                          new Vector3(0f, currentSegment.GetBoundsSize().y, 0f);
+                                                          new Vector3(0f, (segments[_segmentIndex].GetBoundsSize().y / 2) + (currentSegment.GetBoundsSize().y / 2), 0f);
 
         segments[_segmentIndex].UpdateState(SegmentState.Scrolling);
       }
