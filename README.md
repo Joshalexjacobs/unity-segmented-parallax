@@ -19,6 +19,7 @@ For now you'll need to import the Example Scene from the Package Manager window:
 ![Samples](https://i.imgur.com/qE96UrJ.png)
 
 ## Todo
+   * Simple bounding boxes for transform clamping
    * Support for layered parallax backgrounds
    * Support for animated backgrounds
    * Vertical and Horizontal scrolling (currently only vertical is supported)
