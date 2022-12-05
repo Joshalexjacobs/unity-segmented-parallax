@@ -6,6 +6,12 @@ using UnityEngine;
 namespace SegmentedParallax {
   public class SegmentedParallaxController : MonoBehaviour {
 
+    // TODO: add horizontal directions
+    public enum Direction {
+      Up,
+      Down
+    }
+
     public float scrollSpeed = 1;
 
     public List<Segment> segments;
@@ -24,12 +30,28 @@ namespace SegmentedParallax {
 
     private bool _lerpToNewScrollSpeed = false;
 
+    public Direction GetDirection() {
+      if (scrollSpeed > 0) {
+        return Direction.Down;
+      }
+
+      return Direction.Up;
+    }
+    
     public void EnableNextSegment(Segment currentSegment) {
       _segmentIndex++;
 
       if (_segmentIndex < segments.Count) {
-        segments[_segmentIndex].transform.localPosition = currentSegment.transform.localPosition +
-                                                          new Vector3(0f, (segments[_segmentIndex].GetBoundsSize().y / 2) + (currentSegment.GetBoundsSize().y / 2), 0f);
+        switch (GetDirection()) {
+          case Direction.Down:
+            segments[_segmentIndex].transform.localPosition = currentSegment.transform.localPosition +
+                                                              new Vector3(0f, (segments[_segmentIndex].GetBoundsSize().y / 2) + (currentSegment.GetBoundsSize().y / 2), 0f);
+            break;
+          case Direction.Up:
+            segments[_segmentIndex].transform.localPosition = currentSegment.transform.localPosition -
+                                                              new Vector3(0f, (segments[_segmentIndex].GetBoundsSize().y / 2) + (currentSegment.GetBoundsSize().y / 2), 0f);
+            break;
+        }
 
         segments[_segmentIndex].UpdateState(SegmentState.Scrolling);
       }

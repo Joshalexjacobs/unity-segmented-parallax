@@ -20,8 +20,5 @@ For now you'll need to import the Example Scene from the Package Manager window:
 
 ## Todo
    * Simple bounding boxes for transform clamping
-   * Support for layered parallax backgrounds
-   * Support for animated backgrounds
    * Vertical and Horizontal scrolling (currently only vertical is supported)
-   * Ability to reverse direction on the fly
    * Documentation

@@ -65,36 +65,76 @@ namespace SegmentedParallax {
     }
 
     private void ProcessLoopableSegment() {
-      if (transform.position.y <= -_boundsSize.y) {
-        if (segmentState == SegmentState.Scrolling || segmentState == SegmentState.PendingDeactivation) {
-          Shift(new Vector3(0f, _boundsSize.y, 0f));
+      switch (segmentedParallaxController.GetDirection()) {
+        case SegmentedParallaxController.Direction.Down:
+          if (transform.position.y <= -_boundsSize.y) {
+            if (segmentState == SegmentState.Scrolling || segmentState == SegmentState.PendingDeactivation) {
+              Shift(new Vector3(0f, _boundsSize.y, 0f));
 
-          if (segmentState == SegmentState.PendingDeactivation) {
-            PendingDeactivation();
+              if (segmentState == SegmentState.PendingDeactivation) {
+                PendingDeactivation();
+              }
+            }
+            else if (segmentState == SegmentState.Deactivated) {
+              Deactivate();
+            }
           }
-        }
-        else if (segmentState == SegmentState.Deactivated) {
-          Deactivate();
-        }
+          break;
+        case SegmentedParallaxController.Direction.Up:
+          if (transform.position.y >= _boundsSize.y) {
+            if (segmentState == SegmentState.Scrolling || segmentState == SegmentState.PendingDeactivation) {
+              Shift(new Vector3(0f, -_boundsSize.y, 0f));
+
+              if (segmentState == SegmentState.PendingDeactivation) {
+                PendingDeactivation();
+              }
+            }
+            else if (segmentState == SegmentState.Deactivated) {
+              Deactivate();
+            }
+          }
+          break;
       }
     }
 
     private void ProcessStaticSegment() {
-      if (transform.localPosition.y < 0f) {
-        if (!scrollPast) {
-          UpdateState(SegmentState.Idle);
+      switch (segmentedParallaxController.GetDirection()) {
+        case SegmentedParallaxController.Direction.Down:
+          if (transform.localPosition.y < 0f) {
+            if (!scrollPast) {
+              UpdateState(SegmentState.Idle);
 
-          transform.localPosition = Vector3.zero;
-        }
-        else if (segmentState != SegmentState.Deactivated) {
-          PendingDeactivation();
-        }
-      }
+              transform.localPosition = Vector3.zero;
+            }
+            else if (segmentState != SegmentState.Deactivated) {
+              PendingDeactivation();
+            }
+          }
 
-      if (transform.position.y <= -_boundsSize.y) {
-        if (segmentState == SegmentState.Deactivated) {
-          Deactivate();
-        }
+          if (transform.position.y <= -_boundsSize.y) {
+            if (segmentState == SegmentState.Deactivated) {
+              Deactivate();
+            }
+          }
+          break;
+        case SegmentedParallaxController.Direction.Up:
+          if (transform.localPosition.y > 0f) {
+            if (!scrollPast) {
+              UpdateState(SegmentState.Idle);
+
+              transform.localPosition = Vector3.zero;
+            }
+            else if (segmentState != SegmentState.Deactivated) {
+              PendingDeactivation();
+            }
+          }
+
+          if (transform.position.y >= _boundsSize.y) {
+            if (segmentState == SegmentState.Deactivated) {
+              Deactivate();
+            }
+          }
+          break;
       }
     }
 
